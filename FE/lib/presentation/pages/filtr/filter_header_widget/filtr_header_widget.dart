@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:referat/app_colors/app_colors.dart';
 import 'package:referat/app_colors/app_text_styles.dart';
-class FilterHeaderWidget extends StatelessWidget {
-  const FilterHeaderWidget({Key? key, required this.width}) : super(key: key);
+class FilterHeaderWidget extends StatefulWidget {
+   FilterHeaderWidget({Key? key, required this.width, required this.list, this.onTap}) : super(key: key);
  final double width;
- final bool list=true;
+ final bool list;
+ final Function(bool list)? onTap;
+
+  @override
+  State<FilterHeaderWidget> createState() => _FilterHeaderWidgetState();
+}
+
+class _FilterHeaderWidgetState extends State<FilterHeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +20,7 @@ class FilterHeaderWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppColors.borderGray)),
       height: 40,
-      width: width<410?width-400:width+5,
+      width: widget.width<410?widget.width-400:widget.width+5,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -24,8 +31,8 @@ class FilterHeaderWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed:(){},icon: const Icon(Icons.grid_view_sharp,)),
-              IconButton(onPressed:(){},icon: Icon(Icons.table_rows_rounded,color: list?AppColors.primary:null,)),
+              IconButton(onPressed:()=>widget.onTap!(widget.list),icon:  Icon(Icons.grid_view_sharp,color: widget.list?null:AppColors.primary,)),
+              IconButton(onPressed:()=>widget.onTap!(widget.list),icon: Icon(Icons.table_rows_rounded,color: widget.list?AppColors.primary:null,)),
             ],
           ),
 

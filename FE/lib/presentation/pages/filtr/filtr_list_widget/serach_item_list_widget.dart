@@ -16,7 +16,7 @@ class FiltrListItemWidget extends StatelessWidget {
         border: Border.all(color: AppColors.grey),
         borderRadius: BorderRadius.circular(14),
       ),
-      height: 160,
+      height: 170,
       child: LayoutBuilder(
         builder: (context,constrains) {
           return Row(

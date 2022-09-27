@@ -67,7 +67,11 @@ class _FiltrPageState extends State<FiltrPage> {
                       child: Column(
                         children: [
                           //40
-                          FilterHeaderWidget(width: constrains.maxWidth),
+                          FilterHeaderWidget(width: constrains.maxWidth, list: list,onTap: (e){
+                            setState(() {
+                              list=!list;
+                            });
+                          },),
 
                           list?SizedBox(
                             height: constrains.maxHeight-170,

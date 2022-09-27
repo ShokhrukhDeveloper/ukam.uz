@@ -7,7 +7,8 @@ import 'package:referat/presentation/pages/home_page/category_row_widget/swipe_b
 import 'category_item.dart';
 
 class CategoryRowWidget extends StatefulWidget {
-  const CategoryRowWidget({Key? key}) : super(key: key);
+  final VoidCallback? OnTapAll;
+  const CategoryRowWidget({Key? key, this.OnTapAll}) : super(key: key);
 
   @override
   State<CategoryRowWidget> createState() => _CategoryRowWidgetState();
@@ -21,6 +22,7 @@ class _CategoryRowWidgetState extends State<CategoryRowWidget> {
     super.dispose();
     controller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +31,7 @@ class _CategoryRowWidgetState extends State<CategoryRowWidget> {
         Align(
             alignment: Alignment.topRight,
             child: TextButton(
-                onPressed: (){},
+                onPressed: widget.OnTapAll,
                 child: Text("Barchasi",style: AppTextStyles.textButton32Style,))
 
         ),

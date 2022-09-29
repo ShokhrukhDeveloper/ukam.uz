@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:referat/presentation/widget/comment_badge_widget.dart';
-
 import '../../../app_colors/app_colors.dart';
 import '../../../app_colors/app_text_styles.dart';
 import '../filtr/filtr_list_widget/serach_item_list_widget.dart';
@@ -52,7 +51,7 @@ class ProductDetails extends StatelessWidget {
                             SizedBox(
                               width: 190,
                               child: Row(
-                              children:  [
+                              children:  const [
                                 Icon(Icons.star,color: AppColors.secondary, size: 20,),
                                 SizedBox(width:1 ,),
                                 Icon(Icons.star,color: AppColors.secondary, size: 20,),
@@ -63,12 +62,12 @@ class ProductDetails extends StatelessWidget {
                                 SizedBox(width:1 ,),
                                 Icon(Icons.star,color: AppColors.secondary, size: 20,),
                                 SizedBox(width:1 ,),
-                                Text("4.7", style: AppTextStyles.text28W700Style),
-                                const SizedBox(width: 10,),
-                                const CommentBadge(),
-                                const SizedBox(width: 15,),
-                                const Icon(Icons.bookmark_border_outlined,size: 20,color: AppColors.gray,),
-                                const SizedBox(width: 5,),
+                                Text("4.7", style: AppTextStyles.text24W500Black),
+                                SizedBox(width: 10,),
+                                CommentBadge(),
+                                SizedBox(width: 10,),
+                                Icon(Icons.bookmark_border_outlined,size: 20,color: AppColors.gray,),
+                                SizedBox(width: 5,),
                               ],
                               ),
                             ),
@@ -204,7 +203,6 @@ class ProductDetails extends StatelessWidget {
                             FloatingActionButton.extended(
                               backgroundColor: AppColors.white,
                                 onPressed: (){},
-
                                 label: Row(
                               children: const [
                                 Icon(Icons.download,color: AppColors.black,), Text("Yuklab olish",style: AppTextStyles.text16W500Black,)

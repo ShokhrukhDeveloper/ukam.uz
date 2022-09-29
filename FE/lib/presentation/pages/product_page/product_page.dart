@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:referat/presentation/pages/home_page/category_row_widget/category_row_widget.dart';
+import 'package:referat/presentation/pages/product_page/product_data/product_data.dart';
 import 'package:referat/presentation/widget/appbar_widget/appbar_widget.dart';
 import 'package:referat/presentation/widget/category_result_widget/category_result_widget.dart';
 
@@ -21,10 +22,21 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children:  const [
+        children:   [
           AppBarWidget(),
           CategoryResultWidget(),
-          ProductDetails()
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: const [
+                  ProductDetails(),
+                  ProductDataWidget(),
+                  
+                ],
+              ),
+            ),
+          ),
+
           // Container(
           //   margin: const EdgeInsets.only(left: 20,right: 10,top: 15),
           //   child: LayoutBuilder(

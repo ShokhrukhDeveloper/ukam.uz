@@ -59,8 +59,23 @@ class AppTextStyles {
       fontWeight: FontWeight.w900,
       color: AppColors.black
   );
+  static const text24W500Gray=TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w900,
+      color: AppColors.gray
+  );
   static const text10W400StyleGray=TextStyle(
       fontSize: 13,
+      fontWeight: FontWeight.w400,
+      color: AppColors.gray
+  );
+  static const text14BoldStyleBlack=TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+      color: AppColors.black
+  );
+  static const text14W400StyleGrey=TextStyle(
+      fontSize: 14,
       fontWeight: FontWeight.w400,
       color: AppColors.gray
   );

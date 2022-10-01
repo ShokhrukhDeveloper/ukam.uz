@@ -8,6 +8,8 @@ public class UnitOfWork : IUnitOfWork
 
     public IUSerRepository Users { get; set; }
     public ICategoryRepository Categories { get; set; }
+   
+
     public UnitOfWork(AppDbContext context)
     {
         _context = context;

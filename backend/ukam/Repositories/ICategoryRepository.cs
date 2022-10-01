@@ -1,3 +1,5 @@
 namespace Backend.Uckam.Repositories;
 using Backend.Uckam.Entities;
-public interface ICategotryRepository:IGenericRepository<Category>{}
+using ukam.Entities;
+
+public interface ICategoryRepository:IGenericRepository<Category>{}

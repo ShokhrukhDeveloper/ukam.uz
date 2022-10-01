@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ukam.data.Migrations
+namespace ukam.Data.Migrations
 {
     public partial class Create_Users_Table : Migration
     {
@@ -19,7 +19,7 @@ namespace ukam.data.Migrations
                     UserName = table.Column<string>(type: "TEXT", nullable: false),
                     LastName = table.Column<string>(type: "TEXT", nullable: false),
                     PasswordHash = table.Column<string>(type: "TEXT", nullable: false),
-                    UserImage = table.Column<string>(type: "TEXT", nullable: false),
+                    UserPath = table.Column<string>(type: "TEXT", nullable: false),
                     Balance = table.Column<double>(type: "REAL", nullable: false),
                     Block = table.Column<bool>(type: "INTEGER", nullable: false),
                     Language = table.Column<int>(type: "INTEGER", nullable: false),

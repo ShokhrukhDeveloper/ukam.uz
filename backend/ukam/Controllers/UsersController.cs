@@ -32,7 +32,7 @@ public class UsersController : ControllerBase
             if (!createUserResult.IsSuccess)
                 return BadRequest(new { ErrorMessage = createUserResult.ErrorMessage });
 
-            return CreatedAtAction(nameof(User), new { Id = createUserResult?.Data?.Id }, ToDto(createUserResult?.Data!));
+            return Ok(createUserResult);
         }
         catch (Exception e)
         {
@@ -54,10 +54,10 @@ public class UsersController : ControllerBase
         UserName = dtos.UserName,
         PasswordHash = dtos.Password,
         UserImage = dtos.UserImage,
-        Balance = dtos.Balance,
-        Block = dtos.Block,
-        Language = ToELanguageModel(dtos.Language),
-        Role = ToERoleModel(dtos.Role),
+        Balance = dtos.Balance ?? 0.0,
+        Block = dtos.Block ?? false,
+        Language = ToELanguageModel(dtos.Language ?? Dtos.ELanguage.Uzb),
+        Role = ToERoleModel(dtos.Role ?? Dtos.ERole.User),
     };
 
     private Models.ERole ToERoleModel(Dtos.ERole role)

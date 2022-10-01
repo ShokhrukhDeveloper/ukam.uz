@@ -35,4 +35,17 @@ public partial class UserService
         Entities.Enums.ERole.SuperAdmin => Models.ERole.SuperAdmin,
         _ => Models.ERole.User,
     };
+
+      private User ToModel(Entities.User entity)
+    => new()
+    {
+        Id = entity.Id,
+        FirstName = entity.FirstName,
+        LastName = entity.LastName,
+        UserName = entity.UserName,
+        Role = ToModelERole(entity.Role),
+        Language = ToModelELanguage(entity.Language),
+        CreatedAt = entity.CreatedAt,
+        UpdatedAt = entity.UpdatedAt,
+    };
 }

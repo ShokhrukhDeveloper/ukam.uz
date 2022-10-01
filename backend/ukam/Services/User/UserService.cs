@@ -14,8 +14,13 @@ public partial class UserService : IUserService
     }
     public async ValueTask<Result<User>> CreateAsync(User model)
     {
+        var filehelper = new FileHelper();
         
-        var createdEntity = new Backend.Uckam.Entities.User(model, "url", ToEntityLanguage(model.Language), ToEntityRole(model.Role));
+        if (!filehelper.FileValidateImage(model.UserImage))
+            return new("File is invalid");
+
+        var fileName = filehelper.WriteFileAsync(model.UserImage, FileFolders.UserImage);    
+        var createdEntity = new Backend.Uckam.Entities.User(model, fileName.Result, ToEntityLanguage(model.Language), ToEntityRole(model.Role));
 
         try
         {
@@ -30,18 +35,7 @@ public partial class UserService : IUserService
         }
     }
 
-    private User ToModel(Entities.User entity)
-    => new()
-    {
-        Id = entity.Id,
-        FirstName = entity.FirstName,
-        LastName = entity.LastName,
-        UserName = entity.UserName,
-        Role = ToModelERole(entity.Role),
-        Language = ToModelELanguage(entity.Language),
-        CreatedAt = entity.CreatedAt,
-        UpdatedAt = entity.UpdatedAt,
-    };
+
 
     public ValueTask<bool> ExistsAsync(ulong id)
     {

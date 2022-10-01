@@ -1,5 +1,7 @@
 #pragma warning disable
 using Backend.Uckam.data;
+using System;
+using System.Linq.Expressions;
 
 namespace Backend.Uckam.Repositories;
 
@@ -22,9 +24,12 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
         await _context.SaveChangesAsync();
     }
 
+    public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
+        => _context.Set<TEntity>().Where(expression);
+
     public IQueryable<TEntity> GetAll() => _context.Set<TEntity>();
 
-    public TEntity GetById(ulong id) => _context.Set<TEntity>().Find(id);
+    public TEntity GetByIdAsync(ulong id) => _context.Set<TEntity>().Find(id);
 
     public async ValueTask<TEntity> Remove(TEntity entity)
     {

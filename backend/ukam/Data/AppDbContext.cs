@@ -1,6 +1,7 @@
 using Backend.Uckam.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ukam.Entities;
 
 namespace Backend.Uckam.data;
 
@@ -9,6 +10,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<User>? Users { get; set; }
+    public DbSet<Category> Categories { get; set; }
     // public override int SaveChanges()
     // {
     //     SetDates();

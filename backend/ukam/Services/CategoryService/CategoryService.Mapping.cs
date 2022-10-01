@@ -17,7 +17,7 @@ namespace ukam.Services.CategoryService;
         { 
             Name = model.Name,
             Id = model.Id,
-            CreatedAt = model.CreatedAt,
+            CreatedAt = model.CreatedAt??DateTime.Now,
             CreatorId = model.CreatorId,
             Image = model.Image,
             UpdatedAt = model.UpdatedAt

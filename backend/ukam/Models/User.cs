@@ -12,9 +12,9 @@ public class User
     public string PasswordHash { get; set; }
     public IFormFile UserImage { get; set; }
     public double Balance { get; set; }
-    public bool Block { get; set; } = false;
-    public ELanguage Language { get; set; } = ELanguage.Uzb;
-    public ERole Role { get; set; } = ERole.User;
+    public bool Block { get; set; }
+    public ELanguage Language { get; set; }
+    public ERole Role { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
 }

@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ukam.data.Migrations
+namespace ukam.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220928171819_Create_Users_Table")]
+    [Migration("20221001054253_Create_Users_Table")]
     partial class Create_Users_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,11 +55,11 @@ namespace ukam.data.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserImage")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("UserPath")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

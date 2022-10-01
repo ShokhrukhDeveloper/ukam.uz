@@ -1,7 +1,7 @@
 #pragma warning disable
 using System.ComponentModel.DataAnnotations;
 
-namespace ukam.Entities;
+namespace Backend.Uckam.Entities;
 
 public class Category
 {

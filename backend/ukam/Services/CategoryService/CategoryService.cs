@@ -3,6 +3,7 @@ using Backend.Uckam.Entities.Enums;
 using Backend.Uckam.Repositories;
 using ukam.Models;
 using Microsoft.EntityFrameworkCore;
+using Backend.Uckam.Services;
 
 namespace ukam.Services.CategoryService;
 
@@ -20,8 +21,9 @@ namespace ukam.Services.CategoryService;
         public async ValueTask<Result<Category>> CreateCategory(Category category, IFormFile? formFile=null)
         {
         try
-        {   
-            if (category == null)
+        {
+            var filehelper = new FileHelper();
+            if (category is null)
                 return new("Null reference error");
 
             if (string.IsNullOrWhiteSpace(category.Name))
@@ -29,13 +31,18 @@ namespace ukam.Services.CategoryService;
 
             var user =  _unitOfWork.Users.GetById(category.CreatorId);
 
-            if (user == null) return new("User Not found");
-            Console.WriteLine(user.Role.ToString());
+            if (user is null) return new("User Not found");
+            
 
             if (user.Role != Backend.Uckam.Entities.Enums.ERole.SuperAdmin) 
                 return new("This user is not allowed to add a category");
 
             category.UpdatedAt = null;
+
+            if (formFile is not null)
+                if (filehelper.FileValidateImage(formFile))
+                    category.Image = await filehelper.WriteFileAsync(formFile, FileFolders.CategoryImage);
+                else return new("Given Image file extension invalid type");
 
             var result = await _unitOfWork.Categories.AddAsync(ToEntity(category));
             return new(true) 
@@ -67,8 +74,12 @@ namespace ukam.Services.CategoryService;
                 if (user.Role != Backend.Uckam.Entities.Enums.ERole.SuperAdmin)
                     return new("This user is not allowed to add a category");
 
-                var result = await _unitOfWork.Categories.Remove(category);
-                    return new(true) { Data=ToModel(result)};
+            var filehelper = new FileHelper();
+            if (category.Image is not null)
+              filehelper.DeleteFileByName(category.Image);
+
+            var result = await _unitOfWork.Categories.Remove(category);
+            return new(true) { Data=ToModel(result)};
             }
         catch(Exception e) 
         {
@@ -120,19 +131,20 @@ namespace ukam.Services.CategoryService;
       
         }
 
-        public async ValueTask<Result<Category>> UpdateCategory(ulong categoryId, ulong userId, Category category)
+        public async ValueTask<Result<Category>> UpdateCategory(ulong categoryId, ulong userId, Category category, IFormFile? formFile=null)
         {
-        try
+            try
             {
-        
-            if (categoryId == 0)
+            var filehelper = new FileHelper();
+            if (categoryId == default)
                 return new("Given category Id invalid");
 
-            if (userId == 0)
+            if (userId == default)
                 return new("Given user Id invalid");
 
             if (category is null)
-                return new("Category update null refrence error");
+                return new("Category update null reference error");
+
             if (string.IsNullOrEmpty(category.Name))
                 return new("Given category Name invalid");
 
@@ -142,10 +154,7 @@ namespace ukam.Services.CategoryService;
 
             if(user.Role != Backend.Uckam.Entities.Enums.ERole.SuperAdmin)
                 return new("This user is not allowed to edit a category");
-            
-
-
-            var result =await _unitOfWork.Categories.GetAll().FirstOrDefaultAsync(u=>u.Id==userId);
+            var result =await _unitOfWork.Categories.GetAll().FirstOrDefaultAsync(u=>u.Id==categoryId);
 
             if (result is null)
                 return new("Category given Id Not Found");
@@ -154,9 +163,11 @@ namespace ukam.Services.CategoryService;
 
             
             result.Name = category.Name;
+            if (formFile is not null)
+                result.Image=filehelper.UpdateFileBy(result.Image,formFile);
             if(!string.IsNullOrEmpty(category.Image))
                 result.Image = category.Image;
-
+            
             result.UpdatedAt= DateTime.Now;
             var updated = await _unitOfWork.Categories.Update(result);
             return new(true) { Data=ToModel(updated)};

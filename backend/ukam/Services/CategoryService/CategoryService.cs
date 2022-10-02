@@ -17,7 +17,7 @@ namespace ukam.Services.CategoryService;
         _logger = logger;
 
     }
-        public async ValueTask<Result<Category>> CreateCategory(Category category)
+        public async ValueTask<Result<Category>> CreateCategory(Category category, IFormFile? formFile=null)
         {
         try
         {   
@@ -30,9 +30,11 @@ namespace ukam.Services.CategoryService;
             var user =  _unitOfWork.Users.GetById(category.CreatorId);
 
             if (user == null) return new("User Not found");
+            Console.WriteLine(user.Role.ToString());
 
             if (user.Role != Backend.Uckam.Entities.Enums.ERole.SuperAdmin) 
                 return new("This user is not allowed to add a category");
+
             category.UpdatedAt = null;
 
             var result = await _unitOfWork.Categories.AddAsync(ToEntity(category));
@@ -53,8 +55,6 @@ namespace ukam.Services.CategoryService;
         {
         try 
             { 
-                if (categoryId == 0) 
-                    return new("Given category Id invalid");
 
                 var category= _unitOfWork.Categories.GetById(categoryId);
                 if (category is null)

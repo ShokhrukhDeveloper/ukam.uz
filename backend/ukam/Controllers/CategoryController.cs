@@ -1,43 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ukam.Dtos.CategoryDTOs;
+using ukam.Services.CategoryService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ukam.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    [Route("api/[controller]")]
+    [Consumes("multipart/form-data")]
+    public partial class CategoryController : ControllerBase
     {
-        // GET: api/<CategoryController>
+        private readonly ICategoryService _categoryService;
+        private readonly ILogger<CategoryController> _logger;
+
+        public CategoryController(ICategoryService categoryService,ILogger<CategoryController> logger)
+        {
+            _categoryService = categoryService;
+            _logger = logger;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Category>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var result = await _categoryService.GetAllAsync();
+                
+                if(!result.IsSuccess)
+                    return NotFound(new { ErrorMessage=result.ErrorMessage});
+
+                return Ok(result);
+
+            }catch(Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+            }
         }
 
-        // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+      [HttpPost]
+      [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
+      [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
+      [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
+        public async Task<IActionResult> CreateCategory(CategoryCreate category)
         {
-            return "value";
-        }
+            try
+            {
+                if(!ModelState.IsValid)
+                    return BadRequest();
+                var result = await _categoryService.
+                    CreateCategory(new ()
+                        {
+                         Name=category.Name,
+                         CreatorId=category.UserId
+                        }, 
+                         category.Image
+                        );
+                if(!result.IsSuccess)
+                    return NotFound(result);
+                return Ok(result);             
 
-        // POST api/<CategoryController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+            }
         }
+    }  
 
-        // PUT api/<CategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-    }
 }

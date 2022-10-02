@@ -2,6 +2,7 @@ using Backend.Uckam.data;
 using Backend.Uckam.Repositories;
 using Backend.Uckam.Services;
 using Microsoft.EntityFrameworkCore;
+using ukam.Services.CategoryService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
@@ -31,6 +33,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// AppDbInitialize.Seed(app);
 
 app.Run();

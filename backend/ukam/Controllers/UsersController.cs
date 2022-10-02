@@ -22,23 +22,44 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost]
-    public async Task<IActionResult> UserCreate([FromForm] UserCreate dtos)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UserUpdate([FromRoute] ulong id, [FromForm] UserUpdate dtos)
     {
         try
         {
-            var createUserResult = await _userService.CreateAsync(ToModel(dtos));
+            var createUserResult = await _userService.UpdateAsync(id,ToModel(dtos), dtos.Image);
 
             if (!createUserResult.IsSuccess)
                 return BadRequest(new { ErrorMessage = createUserResult.ErrorMessage });
 
-            return CreatedAtAction(nameof(User), new { Id = createUserResult?.Data?.Id }, ToDto(createUserResult?.Data!));
+            return Ok(createUserResult);
         }
         catch (Exception e)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
         }
 
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UserCreate([FromForm] UserCreate dtos)
+    {
+        _logger.LogInformation("all of them are good ===============");
+
+        try
+        {
+            var createUserResult = await _userService.CreateAsync(ToModel(dtos), dtos.Image);
+
+            if (!createUserResult.IsSuccess)
+                return BadRequest(new { ErrorMessage = createUserResult.ErrorMessage });
+
+            return Ok(createUserResult);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+        // remove this line next repository 
     }
 
     private object? ToDto(object value)
@@ -53,12 +74,20 @@ public class UsersController : ControllerBase
         LastName = dtos.LastName,
         UserName = dtos.UserName,
         PasswordHash = dtos.Password,
-        UserImage = dtos.UserImage,
-        Balance = dtos.Balance,
-        Block = dtos.Block,
-        Language = ToELanguageModel(dtos.Language),
-        Role = ToERoleModel(dtos.Role),
+        Balance = dtos.Balance ?? 0.0,
+        Language = ToELanguageModel(dtos.Language ?? Dtos.ELanguage.Uzb),
     };
+    private Models.User ToModel(UserUpdate dtos)
+    => new()
+    {
+        FirstName = dtos.FirstName,
+        LastName = dtos.LastName,
+        UserName = dtos.UserName,
+        PasswordHash = dtos.Password,
+        Balance = dtos.Balance ?? 0.0,
+        Language = ToELanguageModel(dtos.Language ?? Dtos.ELanguage.Uzb),
+    };
+
 
     private Models.ERole ToERoleModel(Dtos.ERole role)
     => role switch

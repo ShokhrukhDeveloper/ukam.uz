@@ -23,7 +23,7 @@ public class AppDbInitialize
                         FirstName = "G'olibjon",
                         UserName = "Adi",
                         LastName = "Turdialiyev",
-                        UserImage = "pg",
+                        UserPath = "pg",
                         Role = Entities.Enums.ERole.SuperAdmin,
                         Balance = 123.213,
                         PasswordHash = "salom",
@@ -36,7 +36,7 @@ public class AppDbInitialize
                     {
                         FirstName = "Abdulaziz",
                         UserName = "Developer",
-                        UserImage = "jpg",
+                        UserPath = "jpg",
                         Role = Entities.Enums.ERole.SuperAdmin,
                         Balance = 123.000,
                         PasswordHash = "salom",

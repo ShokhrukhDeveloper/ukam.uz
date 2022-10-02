@@ -5,6 +5,7 @@ namespace Backend.Uckam.Entities.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
+
     public virtual void Configure(EntityTypeBuilder<User> builder)
     {
         builder.Property(u => u.PasswordHash).HasMaxLength(64).IsRequired(true);
@@ -15,4 +16,5 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Role).IsRequired();
         builder.Property(u => u.Language).IsRequired();
     }
+
 }

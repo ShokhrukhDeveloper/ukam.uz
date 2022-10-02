@@ -43,6 +43,7 @@ public partial class UserService
         FirstName = entity.FirstName,
         LastName = entity.LastName,
         UserName = entity.UserName,
+        UserImage = entity.UserPath,
         Role = ToModelERole(entity.Role),
         Language = ToModelELanguage(entity.Language),
         CreatedAt = entity.CreatedAt,

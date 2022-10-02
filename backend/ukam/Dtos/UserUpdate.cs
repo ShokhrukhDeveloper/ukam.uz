@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Uckam.Dtos;
 
-public class UserCreate
+public class UserUpdate
 {
     public string? FirstName { get; set; }
     public string? UserName { get; set; }

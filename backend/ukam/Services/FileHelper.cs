@@ -7,9 +7,19 @@ public class FileHelper : IFileHelper
 
     public bool FileValidateImage(IFormFile file)
     {
-        var defineCsvOrXlsxFile = DefineFileExtension(file);
+        var defineFileExtension = DefineFileExtension(file);
 
-        if ((defineCsvOrXlsxFile.ToLower() == "png" || defineCsvOrXlsxFile.ToLower() == "jpg" || defineCsvOrXlsxFile.ToLower() == "gif" || defineCsvOrXlsxFile.ToLower() == "jpeg"))
+        if ((defineFileExtension.ToLower() == "png" || defineFileExtension.ToLower() == "jpg" || defineFileExtension.ToLower() == "gif" || defineFileExtension.ToLower() == "jpeg"))
+            return true;
+
+        return false;
+    }
+
+    public bool FileValidate(IFormFile file)
+    {
+        var defineFileExtension = DefineFileExtension(file);
+
+        if ((defineFileExtension.ToLower() == "text" || defineFileExtension.ToLower() == "docs"))
             return true;
 
         return false;
@@ -17,10 +27,8 @@ public class FileHelper : IFileHelper
     public async Task<string> WriteFileAsync(IFormFile file, string folder)
     {
         var fileExtension = DefineFileExtension(file);
-// "
         var filename = DateTime.Now.ToString("yyyy'-'MM'-'dd'-'hh'-'mm'-'ss") + "." + fileExtension;
         var filePath = Folder(folder) + @"\" + filename;
-        Console.WriteLine($"======================={filePath}");
 
         using var fileStream = new FileStream(filePath, FileMode.Create, System.IO.FileAccess.Write);
         await file.CopyToAsync(fileStream);
@@ -29,7 +37,16 @@ public class FileHelper : IFileHelper
     }
     public bool DeleteFileByName(string fileName)
     {
-        throw new NotImplementedException();
+        var filePath = Folder(fileName);
+        if (File.Exists(filePath))
+        {
+            // If file found, delete it    
+            File.Delete(filePath);
+
+            return true;
+        }
+
+        return false;
     }
 
     public string GetFileByName(string fileName)
@@ -72,5 +89,5 @@ public class FileHelper : IFileHelper
         return reversedString;
     }
 
-    private static string Folder(string fileFolder) => Path.Combine(Directory.GetCurrentDirectory(), @"Data\Folders\" + fileFolder);
+    public string Folder(string fileFolder) => Path.Combine(Directory.GetCurrentDirectory(), @"Data\Folders\" + fileFolder);
 }

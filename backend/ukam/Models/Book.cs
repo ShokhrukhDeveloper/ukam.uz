@@ -1,3 +1,4 @@
+#pragma warning disable
 namespace Backend.Uckam.Models;
 
 public class Book

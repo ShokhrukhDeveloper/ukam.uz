@@ -1,0 +1,10 @@
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.AssemblyInfo.cs
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.dll
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\refint\ukam.dll
+C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.pdb

@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ukam.Dtos.CategoryDTOs;
 using ukam.Services.CategoryService;
+namespace ukam.Controllers;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ukam.Controllers
-{
     [ApiController]
     [Route("api/[controller]")]
     [Consumes("multipart/form-data")]
@@ -46,7 +43,7 @@ namespace ukam.Controllers
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
       [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
       [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
-        public async Task<IActionResult> CreateCategory(CategoryCreate category)
+      public async Task<IActionResult> CreateCategory([FromForm]CategoryCreate category)
         {
             try
             {
@@ -70,6 +67,29 @@ namespace ukam.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
             }
         }
-    }  
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
+    public async Task<IActionResult> DeleteCategory(ulong userId,ulong categoryId)
+    {
+        try
+        {
+
+
+            var result=await _categoryService.DeleteCategory(categoryId,userId);
+            if (!result.IsSuccess)
+                return BadRequest(result);
+
+            return Ok();
+        }
+        catch (Exception e)
+        {
+
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+    }
 
 }
+    

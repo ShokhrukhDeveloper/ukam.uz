@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Backend.Uckam.Entities.Configurations;
 
-public class UserConfiguration : IEntityTypeConfiguration<User>
+public class UserConfiguration : EntityBaseConfiguration<User>
 {
-    public virtual void Configure(EntityTypeBuilder<User> builder)
+    public override void Configure(EntityTypeBuilder<User> builder)
     {
+        base.Configure(builder);
         builder.Property(u => u.PasswordHash).HasMaxLength(64).IsRequired(true);
         builder.Property(u => u.UserPath).HasColumnType("nvarchar(50)");
         builder.Property(u => u.FirstName).HasColumnType("nvarchar(50)");

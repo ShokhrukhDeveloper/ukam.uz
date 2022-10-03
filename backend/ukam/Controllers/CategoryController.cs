@@ -2,10 +2,8 @@
 using ukam.Dtos.CategoryDTOs;
 using ukam.Services.CategoryService;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace ukam.Controllers;
 
-namespace ukam.Controllers
-{
     [ApiController]
     [Route("api/[controller]")]
     [Consumes("multipart/form-data")]
@@ -46,7 +44,7 @@ namespace ukam.Controllers
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
       [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
       [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
-        public async Task<IActionResult> CreateCategory(CategoryCreate category)
+        public async Task<IActionResult> CreateCategory([FromForm]CategoryCreate category)
         {
             try
             {
@@ -72,4 +70,4 @@ namespace ukam.Controllers
         }
     }  
 
-}
+

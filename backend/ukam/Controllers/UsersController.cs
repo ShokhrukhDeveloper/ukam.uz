@@ -13,7 +13,7 @@ namespace Backend.Uckam.Controllers;
 
 public class UsersController : ControllerBase
 {
-
+    // delete
     private readonly ILogger<UsersController> _logger;
     private readonly IUserService _userService;
 
@@ -83,7 +83,6 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> UserCreate([FromForm] UserCreate dtos)
     {
-        _logger.LogInformation("all of them are good ===============");
 
         try
         {

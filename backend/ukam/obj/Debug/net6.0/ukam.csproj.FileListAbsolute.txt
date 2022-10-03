@@ -52,6 +52,7 @@ C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\scopedcss\bundle
 C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.csproj.CopyComplete
 C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.genruntimeconfig.cache
 C:\Users\user\Desktop\ssd\ukam.uz\backend\ukam\obj\Debug\net6.0\ref\ukam.dll
+
 D:\projects\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.csproj.AssemblyReference.cache
 D:\projects\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.GeneratedMSBuildEditorConfig.editorconfig
 D:\projects\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.AssemblyInfoInputs.cache
@@ -160,3 +161,4 @@ E:\PD\ukam.uz\backend\ukam\obj\Debug\net6.0\refint\ukam.dll
 E:\PD\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.pdb
 E:\PD\ukam.uz\backend\ukam\obj\Debug\net6.0\ukam.genruntimeconfig.cache
 E:\PD\ukam.uz\backend\ukam\obj\Debug\net6.0\ref\ukam.dll
+

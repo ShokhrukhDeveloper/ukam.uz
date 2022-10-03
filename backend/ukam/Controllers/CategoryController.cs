@@ -46,7 +46,7 @@ namespace ukam.Controllers
       [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Category))]
       [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Dtos.Error))]
       [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(Dtos.Error))]
-        public async Task<IActionResult> CreateCategory(CategoryCreate category)
+        public async Task<IActionResult> CreateCategory([FromForm]CategoryCreate category)
         {
             try
             {

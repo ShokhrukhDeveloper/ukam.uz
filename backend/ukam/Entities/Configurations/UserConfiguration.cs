@@ -5,12 +5,11 @@ namespace Backend.Uckam.Entities.Configurations;
 
 public class UserConfiguration : EntityBaseConfiguration<User>
 {
-<<<<<<< HEAD
+
 
     public virtual void Configure(EntityTypeBuilder<User> builder)
-=======
-    public override void Configure(EntityTypeBuilder<User> builder)
->>>>>>> 7b37a1eb6cc733e1bc5512caff48959aacd5d814
+
+
     {
         base.Configure(builder);
         builder.Property(u => u.PasswordHash).HasMaxLength(64).IsRequired(true);

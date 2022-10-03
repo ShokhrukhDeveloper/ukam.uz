@@ -13,6 +13,7 @@ namespace Backend.Uckam.Controllers;
 
 public class UsersController : ControllerBase
 {
+    
     private readonly ILogger<UsersController> _logger;
     private readonly IUserService _userService;
 

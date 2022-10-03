@@ -23,7 +23,7 @@ public class AppDbInitialize
                         FirstName = "G'olibjon",
                         UserName = "Adi",
                         LastName = "Turdialiyev",
-                        UserPath = "pg",
+                        UserPath = "null",
                         Role = Entities.Enums.ERole.SuperAdmin,
                         Balance = 123.213,
                         PasswordHash = "salom",

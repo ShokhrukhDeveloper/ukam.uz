@@ -2,6 +2,7 @@
 
 using Backend.Uckam.Models;
 using Backend.Uckam.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Uckam.Services;
 public partial class UserService : IUserService
@@ -46,15 +47,50 @@ public partial class UserService : IUserService
         throw new NotImplementedException();
     }
 
-    public ValueTask<Result<List<User>>> GetAllAdminsAsync(int page = 1, int limit = 10)
+    public async ValueTask<Result<List<User>>> GetAllPaginatedAdminsAsync(int page = 1, int limit = 10)
     {
-        throw new NotImplementedException();
+         try
+        {
+            var existingTopics = _unitOfWork.Users.GetAll().Where(u => u.Role.ToString() == "Admin" && u.Role.ToString() == "Super Admin" );
+            
+            if(existingTopics is null)
+                return new("No users found. Contact support.");
+
+            var filteredTopics = await existingTopics
+                .Skip((page - 1) * limit)
+                .Take(limit)
+                .Select(e => ToModel(e))
+                .ToListAsync();
+            
+            return new(true) { Data = filteredTopics };
+        }
+        catch(Exception e)
+        {
+            _logger.LogError($"Error occured at {nameof(UserService)}", e);
+            throw new("Couldn't get topics. Contact support.", e);
+        }     
     }
 
-    public ValueTask<Result<List<User>>> GetAllUsersAsync(int page = 1, int limit = 10)
+    public async ValueTask<Result<List<User>>> GetAllPaginatedUsersAsync(int page = 1, int limit = 10)
     {
-        // I am going to wotk this function
-        throw new NotImplementedException();
+       try
+        {
+            var existingUsers = _unitOfWork.Users.GetAll();
+            
+            if(existingUsers is null)
+                return new("No users found. Contact support.");
+
+            var filteredUsers = await existingUsers
+                .Select(u => ToModel(u))
+                .ToListAsync();
+            
+            return new(true) { Data = filteredUsers };
+        }
+        catch(Exception e)
+        {
+            _logger.LogError($"Error occured at {nameof(UserService)}", e);
+            throw new("Couldn't get users. Contact support.", e);
+        }       
     }
 
     public async ValueTask<Result<User>> GetByIdAsync(ulong id)

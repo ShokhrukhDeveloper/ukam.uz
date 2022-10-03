@@ -83,7 +83,6 @@ public class UsersController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> UserCreate([FromForm] UserCreate dtos)
     {
-        _logger.LogInformation("all of them are good ===============");
 
         try
         {

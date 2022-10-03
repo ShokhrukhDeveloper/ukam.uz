@@ -1,6 +1,7 @@
 using Backend.Uckam.data;
 using Backend.Uckam.Repositories;
 using Backend.Uckam.Services;
+using Backend.Uckam.Services.BookService;
 using Microsoft.EntityFrameworkCore;
 using ukam.Services.CategoryService;
 
@@ -17,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 var app = builder.Build();
 

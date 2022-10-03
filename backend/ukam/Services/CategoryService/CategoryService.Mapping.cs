@@ -4,7 +4,7 @@ namespace ukam.Services.CategoryService;
     public partial class CategoryService
     {
     
-    public Category ToModel(Entities.Category entity) => new()
+    public Category ToModel(Backend.Uckam.Entities.Category entity) => new()
         { 
             Id = entity.Id,
             Name = entity.Name,
@@ -13,7 +13,7 @@ namespace ukam.Services.CategoryService;
             UpdatedAt = entity.UpdatedAt,   
             CreatorId = entity.CreatorId
         };
-    public Entities.Category ToEntity(Category model) => new() 
+    public Backend.Uckam.Entities.Category ToEntity(Category model) => new() 
         { 
             Name = model.Name,
             Id = model.Id,

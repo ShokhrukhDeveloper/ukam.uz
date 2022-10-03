@@ -13,7 +13,7 @@ namespace Backend.Uckam.Controllers;
 
 public class UsersController : ControllerBase
 {
-    
+
     private readonly ILogger<UsersController> _logger;
     private readonly IUserService _userService;
 
@@ -22,13 +22,49 @@ public class UsersController : ControllerBase
         _logger = logger;
         _userService = userService;
     }
+    [HttpGet]
+
+    public async Task<IActionResult> GetUsers([FromQuery] UsersGetAllPagination pagination)
+    {
+        try
+        {
+            var usersResult = await _userService.GetAllPaginatedUsersAsync(pagination.Page, pagination.Limit);
+            if (!usersResult.IsSuccess)
+                return NotFound(new { ErrorMessage = usersResult.ErrorMessage });
+
+            return Ok(usersResult?.Data?.Select(ToDto));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+    }
+
+    [HttpGet]
+    [Route("Admins")]
+
+    public async Task<IActionResult> GetAdmins([FromForm] UsersGetAllPagination pagination)
+    {
+        try
+        {
+            var usersResult = await _userService.GetAllPaginatedUsersAsync(pagination.Page, pagination.Limit);
+            if (!usersResult.IsSuccess)
+                return NotFound(new { ErrorMessage = usersResult.ErrorMessage });
+
+            return Ok(usersResult?.Data?.Select(ToDto));
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+    }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UserUpdate([FromRoute] ulong id, [FromForm] UserUpdate dtos)
     {
         try
         {
-            var createUserResult = await _userService.UpdateAsync(id,ToModel(dtos), dtos.Image);
+            var createUserResult = await _userService.UpdateAsync(id, ToModel(dtos), dtos.Image);
 
             if (!createUserResult.IsSuccess)
                 return BadRequest(new { ErrorMessage = createUserResult.ErrorMessage });
@@ -88,8 +124,6 @@ public class UsersController : ControllerBase
         Balance = dtos.Balance ?? 0.0,
         Language = ToELanguageModel(dtos.Language ?? Dtos.ELanguage.Uzb),
     };
-
-
     private Models.ERole ToERoleModel(Dtos.ERole role)
     => role switch
     {

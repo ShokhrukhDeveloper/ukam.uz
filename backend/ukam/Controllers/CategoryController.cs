@@ -17,7 +17,7 @@ namespace ukam.Controllers;
             _categoryService = categoryService;
             _logger = logger;
         }
-
+// test file
         [HttpGet]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Category>))]

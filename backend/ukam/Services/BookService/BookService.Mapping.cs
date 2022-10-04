@@ -32,5 +32,28 @@ public partial class BookService
         _=> Models.ECheckBook.Tekshirilmadi,
     };
 
+    private Entities.Enums.ELanguage ToEntityELanguage(ELanguage model)
+    => model switch
+    {
+       Models.ELanguage.Eng => Entities.Enums.ELanguage.Eng,
+       Models.ELanguage.Rus => Entities.Enums.ELanguage.Rus,
+       _=> Entities.Enums.ELanguage.Uzb,
+    };
+    private Entities.EType ToEntityEtype(EType model)
+    => model switch
+    {
+       Models.EType.DiplomIshi => Entities.EType.DiplomIshi,
+       Models.EType.KursIshi => Entities.EType.KursIshi,
+       Models.EType.Referat => Entities.EType.Referat,
+      _=> Entities.EType.Kitoblar,
+    };
+
+    private Entities.Enums.ECheckBook ToEntityECheckBook(ECheckBook model)
+    => model switch
+    {
+        Models.ECheckBook.Tekshirildi => Entities.Enums.ECheckBook.Tekshirildi,
+        _=> Entities.Enums.ECheckBook.Tekshirilmadi,
+    };
+
 }   
     

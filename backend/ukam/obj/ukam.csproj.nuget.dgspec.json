@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Loyiha\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
+    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
   },
   "projects": {
-    "E:\\Loyiha\\ukam.uz\\backend\\ukam\\ukam.csproj": {
+    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Loyiha\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "projectUniqueName": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
         "projectName": "ukam",
-        "projectPath": "E:\\Loyiha\\ukam.uz\\backend\\ukam\\ukam.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "E:\\Loyiha\\ukam.uz\\backend\\ukam\\obj\\",
+        "projectPath": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "packagesPath": "C:\\Users\\ogabe\\.nuget\\packages\\",
+        "outputPath": "D:\\ukam.uz\\backend\\ukam\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ogabe\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -63,7 +63,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -75,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

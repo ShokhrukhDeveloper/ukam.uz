@@ -15,6 +15,8 @@ public partial class UserService : IUserService
         _unitOfWork = unitOfWork;
         _logger = logger;
     }
+
+
     public async ValueTask<Result<User>> CreateAsync(User model, IFormFile? file = null)
     {
         var fileHelper = new FileHelper();
@@ -27,7 +29,7 @@ public partial class UserService : IUserService
         if (file != null)
             fileName = fileHelper.WriteFileAsync(file, FileFolders.UserImage).Result;
 
-        var createdEntity = new Backend.Uckam.Entities.User(model, fileName, ToEntityLanguage(model.Language), ToEntityRole(model.Role));
+        var createdEntity = new Backend.Uckam.Entities.User(model, fileName, ToEntityLanguage(model.Language ?? ELanguage.Uzb));
 
         try
         {
@@ -51,18 +53,19 @@ public partial class UserService : IUserService
     {
         try
         {
-            var existingTopics = _unitOfWork.Users.GetAll().Where(u => u.Role.ToString() == "Admin" && u.Role.ToString() == "Super Admin");
+            var existingAdmins = _unitOfWork.Users.GetAll().Where(u => u.Role == Backend.Uckam.Entities.Enums.ERole.Admin || u.Role == Backend.Uckam.Entities.Enums.ERole.SuperAdmin);
 
-            if (existingTopics is null)
+            if (existingAdmins is null)
                 return new("No users found. Contact support.");
 
-            var filteredTopics = await existingTopics
-                .Skip((page - 1) * limit)
-                .Take(limit)
-                .Select(e => ToModel(e))
-                .ToListAsync();
 
-            return new(true) { Data = filteredTopics };
+            var filteredAdmins = existingAdmins
+                            .Skip((page - 1) * limit)
+                            .Take(limit)
+                            .Select(ToModel)
+                            .ToList();
+
+            return new(true) { Data = filteredAdmins };
         }
         catch (Exception e)
         {
@@ -80,9 +83,11 @@ public partial class UserService : IUserService
             if (existingUsers is null)
                 return new("No users found. Contact support.");
 
-            var filteredUsers = await existingUsers
-                .Select(u => ToModel(u))
-                .ToListAsync();
+            var filteredUsers = existingUsers
+                            .Skip((page - 1) * limit)
+                            .Take(limit)
+                            .Select(ToModel)
+                            .ToList();
 
             return new(true) { Data = filteredUsers };
         }
@@ -111,6 +116,27 @@ public partial class UserService : IUserService
             throw new("Couldn't get user. Contact support.", e);
         }
     }
+    public async ValueTask<Result<User>> ChangeUserOrAdminAsync(ulong id, ERole role)
+    {
+        var existingUser = _unitOfWork.Users.GetAll().FirstOrDefault(u => u.Id == id);
+
+        if (existingUser is null)
+            return new("User with given Id not found ");
+
+        existingUser.Role = ToEntityRole(role);
+
+        try
+        {
+            var createdUser = await _unitOfWork.Users.Update(existingUser);
+
+            return new(true) { Data = ToModel(createdUser) };
+        }
+        catch (Exception e)
+        {
+            _logger.LogInformation($"Error occured at {nameof(UserService)}");
+            throw new("Couldn't create User, Contact support", e);
+        }
+    }
 
     public async ValueTask<Result<User>> UpdateAsync(ulong id, User model, IFormFile? file = null)
     {
@@ -136,10 +162,31 @@ public partial class UserService : IUserService
         existingUser.LastName = model.LastName;
         existingUser.UserName = model.UserName;
         existingUser.Balance = model.Balance;
-        existingUser.PasswordHash = model.PasswordHash;
         existingUser.UserPath = model.UserImage;
-        existingUser.Language = ToEntityLanguage(model.Language);
+        existingUser.Language = ToEntityLanguage(model.Language ?? ELanguage.Uzb);
         existingUser.UserPath = fileName;
+
+        try
+        {
+            var createdUser = await _unitOfWork.Users.Update(existingUser);
+
+            return new(true) { Data = ToModel(createdUser) };
+        }
+        catch (Exception e)
+        {
+            _logger.LogInformation($"Error occured at {nameof(UserService)}");
+            throw new("Couldn't create User, Contact support", e);
+        }
+    }
+
+    public async ValueTask<Result<User>> UserBlock(ulong id, bool block)
+    {
+        var existingUser = _unitOfWork.Users.GetAll().FirstOrDefault(u => u.Id == id);
+
+        if (existingUser is null)
+            return new("User with given Id not found ");
+
+        existingUser.Block = !existingUser.Block;
 
         try
         {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'presentation/pages/filtr/filtr_page.dart';
 import 'presentation/pages/home_page/home_page.dart';
 import 'presentation/pages/product_page/product_page.dart';
+import 'presentation/pages/profile/profile_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home:   const ProductPage()
+      home:    ProfileView()
     );
   }
 }

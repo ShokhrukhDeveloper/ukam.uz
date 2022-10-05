@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Folders\CategoryImages\" />
     <Folder Include="Data\Folders\UserImages\" />
   </ItemGroup>
 

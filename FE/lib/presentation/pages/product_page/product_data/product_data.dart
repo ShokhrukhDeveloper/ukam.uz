@@ -28,7 +28,7 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20,right: 20),
+      padding: const EdgeInsets.only(left: 20,right: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,14 +57,14 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                     fikr=!fikr;
                                     setState(() {});
                                   },
-                                  child: Text("Ma'lumotlar",
+                                  child: const Text("Ma'lumotlar",
                                     style: AppTextStyles.text24W500Black,
                                   ),
                                 ),
                               ),
                               TextButton(
                                 onPressed: (){},
-                                child: Text("Fikrlar",
+                                child: const Text("Fikrlar",
                                   style: AppTextStyles.text24W500Gray,
                                 ),
                               ),
@@ -78,7 +78,7 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                           decoration: BoxDecoration(border: Border.all(color: AppColors.grey)),
                           child: Row(
                             children: [
-                              SizedBox(width: 8,),
+                              const SizedBox(width: 8,),
                               SizedBox( width: 150, child: Text("${index.key}",
                                 style: AppTextStyles.text14BoldStyleBlack,
                                 overflow: TextOverflow.ellipsis,
@@ -104,7 +104,7 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                               SizedBox( width: 150,
                                 child: TextButton(
                                   onPressed: (){},
-                                    child: Text("Ma'lumotlar",
+                                    child: const Text("Ma'lumotlar",
                                       style: AppTextStyles.text24W500Black,
                                     ),
                                 ),
@@ -114,7 +114,7 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                   fikr=!fikr;
                                   setState(() {});
                                 },
-                                child: Text("Fikrlar",
+                                child: const Text("Fikrlar",
                                   style: AppTextStyles.text24W500Gray,
                                 ),
                               ),
@@ -123,7 +123,7 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           height: 200,
                             width: 500,
                           decoration: BoxDecoration(
@@ -133,8 +133,8 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(width: 150, child: Text("Fikringiz",style: AppTextStyles.text18W400Black)),
-                              SizedBox(height: 10,),
+                              const SizedBox(width: 150, child: const Text("Fikringiz",style: AppTextStyles.text18W400Black)),
+                              const SizedBox(height: 10,),
                               Container(
 
                                 decoration: BoxDecoration(
@@ -147,20 +147,20 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: AppColors.grey)
+                                      borderSide: const BorderSide(color: AppColors.grey)
                                     )
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10,),
-                              FloatingActionButton.extended(onPressed: (){}, label: Text("Yuborish"))
+                              const SizedBox(height: 10,),
+                              FloatingActionButton.extended(onPressed: (){}, label: const Text("Yuborish"))
                             ],
                           ),
 
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(10),
 
                             width: 500,
                           decoration: BoxDecoration(
@@ -177,8 +177,8 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                    height: 50,
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(14),
-                                   image: DecorationImage(
-                                     image: CachedNetworkImageProvider("https://picsum.photos/200/300",
+                                   image: const DecorationImage(
+                                     image: const CachedNetworkImageProvider("https://picsum.photos/200/300",
                                      // cacheManager:
                                      ),
                                      fit: BoxFit.cover
@@ -186,19 +186,19 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                  ),
 
                                ),
-                               title: Text("Abdullayev Asadbek"),
-                               subtitle: Text("Апрель 7, 2020"),
+                               title: const Text("Abdullayev Asadbek"),
+                               subtitle: const Text("Апрель 7, 2020"),
                              ),
-                              SizedBox(height: 15,),
+                              const SizedBox(height: 15,),
 
-                              Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
+                              const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
                             ],
                           ),
 
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(10),
 
                             width: 500,
                           decoration: BoxDecoration(
@@ -215,26 +215,25 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                    height: 50,
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(14),
-                                   image: DecorationImage(
-                                     image: CachedNetworkImageProvider("https://picsum.photos/200/300"),
+                                   image: const DecorationImage(
+                                     image:  CachedNetworkImageProvider("https://picsum.photos/200/300"),
                                      fit: BoxFit.cover
                                    )
-                                 ),
-
+                                 )
                                ),
-                               title: Text("Abdullayev Asadbek"),
-                               subtitle: Text("Апрель 7, 2020"),
+                               title: const Text("Abdullayev Asadbek"),
+                               subtitle: const Text("Апрель 7, 2020"),
                              ),
-                              SizedBox(height: 15,),
+                              const SizedBox(height: 15,),
 
-                              Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
+                              const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
                             ],
                           ),
 
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(10),
 
                             width: 500,
                           decoration: BoxDecoration(
@@ -251,26 +250,26 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                    height: 50,
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(14),
-                                   image: DecorationImage(
+                                   image: const DecorationImage(
                                      image: CachedNetworkImageProvider("https://picsum.photos/200/300"),
                                      fit: BoxFit.cover
                                    )
                                  ),
 
                                ),
-                               title: Text("Abdullayev Asadbek"),
-                               subtitle: Text("Апрель 7, 2020"),
+                               title: const Text("Abdullayev Asadbek"),
+                               subtitle: const Text("Апрель 7, 2020"),
                              ),
-                              SizedBox(height: 15,),
+                              const SizedBox(height: 15,),
 
-                              Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
+                              const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
                             ],
                           ),
 
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
-                          padding: EdgeInsets.all(10),
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.all(10),
 
                             width: 500,
                           decoration: BoxDecoration(
@@ -287,26 +286,26 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                    height: 50,
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(14),
-                                   image: DecorationImage(
+                                   image: const DecorationImage(
                                      image: CachedNetworkImageProvider("https://picsum.photos/200/300"),
                                      fit: BoxFit.cover
                                    )
                                  ),
 
                                ),
-                               title: Text("Abdullayev Asadbek"),
-                               subtitle: Text("Апрель 7, 2020"),
+                               title: const Text("Abdullayev Asadbek"),
+                               subtitle: const Text("Апрель 7, 2020"),
                              ),
-                              SizedBox(height: 15,),
+                              const SizedBox(height: 15,),
 
-                              Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
+                              const Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo ipsum aenean sem sed arcu faucibus et. Id scelerisque enim vitae vitae pellentesque.")
                             ],
                           ),
 
                         ),
-                        SizedBox(height: 15,),
-                        FloatingActionButton.extended(onPressed: (){}, label: Text("Ko'proq")),
-                        SizedBox(height: 30,),
+                        const SizedBox(height: 15,),
+                        FloatingActionButton.extended(onPressed: (){}, label: const Text("Ko'proq")),
+                        const SizedBox(height: 30,),
                       ],
                     ),
 
@@ -322,19 +321,19 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.all(14),
-                  child: Text("O'xshashlar",
+                const Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: const Text("O'xshashlar",
                     style: AppTextStyles.text24W500Black,
                   ),
                 ),
-                SimilarWidget(),
-                SizedBox(height: 15,),
-                SimilarWidget(),
-                SizedBox(height: 15,),
-                SimilarWidget(),
-                SizedBox(height: 15,),
-                FloatingActionButton.extended(onPressed: (){}, label: Text("Ko'proq"))
+                const SimilarWidget(),
+                const SizedBox(height: 15,),
+                const SimilarWidget(),
+                const SizedBox(height: 15,),
+                const SimilarWidget(),
+                const SizedBox(height: 15,),
+                FloatingActionButton.extended(onPressed: (){}, label: const Text("Ko'proq"))
 
               ],
             ),

@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
+    "C:\\Users\\user\\Desktop\\ssd\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
   },
   "projects": {
-    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {
+    "C:\\Users\\user\\Desktop\\ssd\\ukam.uz\\backend\\ukam\\ukam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\ssd\\ukam.uz\\backend\\ukam\\ukam.csproj",
         "projectName": "ukam",
-        "projectPath": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
-        "packagesPath": "C:\\Users\\ogabe\\.nuget\\packages\\",
-        "outputPath": "D:\\ukam.uz\\backend\\ukam\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\ssd\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\ssd\\ukam.uz\\backend\\ukam\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ogabe\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,8 +65,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -76,7 +77,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

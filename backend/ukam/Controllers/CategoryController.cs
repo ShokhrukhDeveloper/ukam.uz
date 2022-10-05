@@ -68,6 +68,47 @@ namespace ukam.Controllers;
                 return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
             }
         }
-    }  
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateCategory([FromRoute]ulong Id,[FromForm]UpdateCategory category)
+    {
+        try
+        {
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+            if (Id < 0)
+                return BadRequest();
+            var result = await _categoryService.UpdateCategory(Id,category.UserId, category.Name,category.Image);
+            if (!result.IsSuccess)
+                return BadRequest(result);
+
+            return Ok(ToDTO(result.Data));
+        }
+        catch (Exception e)
+        {
+
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+    }
+
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromQuery]ulong Id, [FromQuery]ulong userId) 
+    {
+        try
+        {
+            var result = await _categoryService.DeleteCategory(Id, userId);
+            if (!result.IsSuccess)
+                return BadRequest(result);
+
+            return Ok(result);
+            
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+    }
+
+}  
 
 

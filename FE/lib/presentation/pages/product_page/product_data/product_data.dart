@@ -178,7 +178,9 @@ class _ProductDataWidgetState extends State<ProductDataWidget> {
                                  decoration: BoxDecoration(
                                    borderRadius: BorderRadius.circular(14),
                                    image: DecorationImage(
-                                     image: CachedNetworkImageProvider("https://picsum.photos/200/300"),
+                                     image: CachedNetworkImageProvider("https://picsum.photos/200/300",
+                                     // cacheManager:
+                                     ),
                                      fit: BoxFit.cover
                                    )
                                  ),

@@ -56,7 +56,7 @@ class _ProfileViewState extends State<ProfileView>
                         ),
                         NavigationRailDestination(
                           icon: Icon(
-                            Icons.wallet,
+                            Icons.wallet_giftcard,
                           ),
                           label: Text(
                             'Э-Хисобme',

@@ -97,7 +97,6 @@ public partial class UserService : IUserService
         }
     }
 
-
     public async ValueTask<Result<User>> GetByIdAsync(ulong id)
     {
         try
@@ -185,7 +184,7 @@ public partial class UserService : IUserService
         if (existingUser is null)
             return new("User with given Id not found ");
 
-        existingUser.Block = !existingUser.Block;
+        existingUser.Block = existingUser.Block;
 
         try
         {

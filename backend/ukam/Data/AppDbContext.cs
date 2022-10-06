@@ -1,4 +1,6 @@
+#pragma warning disable
 using Backend.Uckam.Entities;
+using Backend.Uckam.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -14,6 +16,7 @@ public class AppDbContext : DbContext
     public DbSet<Book>? Books { get; set; }
     public override int SaveChanges()
     {
+        AddNameHash();
         SetDates();
 
         return base.SaveChanges();
@@ -28,6 +31,15 @@ public class AppDbContext : DbContext
 
             if (entry.State == EntityState.Modified)
                 entry.Entity.UpdatedAt = DateTime.Now;
+        }
+    }
+
+    private void AddNameHash()
+    {
+        foreach (var entry in ChangeTracker.Entries<User>())
+        {
+            if (entry.Entity is User user)
+                user.PasswordHash = user?.PasswordHash?.ToLower().Sha256();
         }
     }
 }

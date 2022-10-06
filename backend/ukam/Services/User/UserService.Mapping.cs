@@ -17,7 +17,7 @@ public partial class UserService
     {
         ERole.Admin => Entities.Enums.ERole.Admin,
         ERole.SuperAdmin => Entities.Enums.ERole.SuperAdmin,
-        _ => Entities.Enums.ERole.Admin
+        _ => Entities.Enums.ERole.User
     };
 
     private Models.ELanguage ToModelELanguage(Entities.Enums.ELanguage entity)

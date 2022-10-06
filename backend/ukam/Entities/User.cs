@@ -18,16 +18,16 @@ public class User : EntityBase
     [Obsolete("this constroctor obly be used by Ef Core")]
     public User() { }
 
-    public User(Backend.Uckam.Models.User model, string userImage, ELanguage language, ERole role)
+    public User(Backend.Uckam.Models.User model, string userImage, ELanguage language, ERole? role = null)
     {
         FirstName = model.FirstName;
         LastName = model.LastName;
         UserName = model.UserName;
         UserPath = userImage;
-        PasswordHash = model.PasswordHash;
+        PasswordHash = Backend.Uckam.Services.HashExtension.Sha256(model.Password);
         Block = model.Block;
         Balance = model.Balance;
         Language = language;
-        Role = role;
+        Role = role ?? ERole.User;
     }
 }

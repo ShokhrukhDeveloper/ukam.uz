@@ -16,7 +16,6 @@ public partial class UserService : IUserService
         _logger = logger;
     }
 
-
     public async ValueTask<Result<User>> CreateAsync(User model, IFormFile? file = null)
     {
         var fileHelper = new FileHelper();

@@ -20,7 +20,7 @@ namespace ukam.Services.CategoryService;
             CreatedAt = model.CreatedAt??DateTime.Now,
             CreatorId = model.CreatorId,
             Image = model.Image,
-            UpdatedAt = model.UpdatedAt
+            UpdatedAt = model.UpdatedAt??DateTime.Now
         };
     }
 

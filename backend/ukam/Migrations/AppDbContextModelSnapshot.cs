@@ -3,18 +3,16 @@ using System;
 using Backend.Uckam.data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ukam.Data.Migrations
+namespace ukam.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221005203851_base entity enherited category")]
-    partial class baseentityenheritedcategory
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.9");
@@ -30,6 +28,10 @@ namespace ukam.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BookName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BookPath")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -87,7 +89,6 @@ namespace ukam.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")

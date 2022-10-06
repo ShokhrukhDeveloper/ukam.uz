@@ -31,6 +31,10 @@ namespace ukam.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("BookPath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<ulong>("CategoryId")
                         .HasColumnType("INTEGER");
 

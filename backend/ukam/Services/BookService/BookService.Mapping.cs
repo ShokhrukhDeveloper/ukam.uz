@@ -4,7 +4,7 @@ namespace Backend.Uckam.Services.BookService;
 
 public partial class BookService
 {
-    public Book ToModel(Backend.Uckam.Entities.Book entity ) => new()
+    private Book ToModel(Backend.Uckam.Entities.Book entity ) => new()
     {
         Id = entity.Id,
         BookName = entity.BookName,
@@ -12,9 +12,15 @@ public partial class BookService
         Establish = entity.Establish,
         Content = entity.Content,
         ConverImage = entity.ConverImage,
+        BookPath = entity.BookPath,
         Price = entity.Price,
         Type = ToModelEType(entity.Type),
         CheckBook = ToModelECheckBook(entity.CheckBook),
+        Language = ToModelELanguage(entity.Language),
+        CreatedAt = entity.CreatedAt,
+        UpdatedAt = entity.UpdatedAt,
+        CategoryId = entity.CategoryId,
+        UserId = entity.UserId
     };
 
     private EType ToModelEType(Backend.Uckam.Entities.EType entity)
@@ -30,6 +36,14 @@ public partial class BookService
     {
         Entities.Enums.ECheckBook.Tekshirildi => Models.ECheckBook.Tekshirildi,
         _=> Models.ECheckBook.Tekshirilmadi,
+    };
+
+    private ELanguage ToModelELanguage(Backend.Uckam.Entities.Enums.ELanguage entity)
+    => entity switch
+    {
+         Entities.Enums.ELanguage.Eng => Models.ELanguage.Eng,
+         Entities.Enums.ELanguage.Rus => Models.ELanguage.Rus,
+         _=> Models.ELanguage.Uzb,
     };
 
     private Entities.Enums.ELanguage ToEntityELanguage(ELanguage model)

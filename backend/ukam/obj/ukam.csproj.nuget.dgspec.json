@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
+    "D:\\projects\\ukam.uz\\backend\\ukam\\ukam.csproj": {}
   },
   "projects": {
-    "D:\\ukam.uz\\backend\\ukam\\ukam.csproj": {
+    "D:\\projects\\ukam.uz\\backend\\ukam\\ukam.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "projectUniqueName": "D:\\projects\\ukam.uz\\backend\\ukam\\ukam.csproj",
         "projectName": "ukam",
-        "projectPath": "D:\\ukam.uz\\backend\\ukam\\ukam.csproj",
+        "projectPath": "D:\\projects\\ukam.uz\\backend\\ukam\\ukam.csproj",
         "packagesPath": "C:\\Users\\ogabe\\.nuget\\packages\\",
-        "outputPath": "D:\\ukam.uz\\backend\\ukam\\obj\\",
+        "outputPath": "D:\\projects\\ukam.uz\\backend\\ukam\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ogabe\\AppData\\Roaming\\NuGet\\NuGet.Config"

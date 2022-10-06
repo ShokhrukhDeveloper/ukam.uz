@@ -1,5 +1,5 @@
 #pragma warning disable
-namespace Backend.Uckam.Models;
+namespace Backend.Uckam.Dtos;
 
 public class Book
 {
@@ -11,9 +11,9 @@ public class Book
     public string ConverImage { get; set; }
     public string BookPath { get; set; }
     public double Price { get; set; }
-    public EType Type { get; set; } = EType.Kitoblar;
-    public ELanguage Language { get; set; } = ELanguage.Uzb;
-    public ECheckBook CheckBook { get; set; } = ECheckBook.Tekshirilmadi;
+    public EType Type { get; set; }
+    public ELanguage Language { get; set; }
+    public ECheckBook CheckBook { get; set; }
     public ulong CategoryId { get; set; } 
     public ulong UserId { get; set; }
     public DateTime CreatedAt { get; set; }

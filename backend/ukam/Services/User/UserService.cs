@@ -16,7 +16,6 @@ public partial class UserService : IUserService
         _logger = logger;
     }
 
-
     public async ValueTask<Result<User>> CreateAsync(User model, IFormFile? file = null)
     {
         var fileHelper = new FileHelper();
@@ -97,7 +96,6 @@ public partial class UserService : IUserService
             throw new("Couldn't get users. Contact support.", e);
         }
     }
-
 
     public async ValueTask<Result<User>> GetByIdAsync(ulong id)
     {
@@ -186,7 +184,7 @@ public partial class UserService : IUserService
         if (existingUser is null)
             return new("User with given Id not found ");
 
-        existingUser.Block = !existingUser.Block;
+        existingUser.Block = existingUser.Block;
 
         try
         {

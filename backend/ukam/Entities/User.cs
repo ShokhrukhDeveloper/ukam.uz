@@ -11,7 +11,7 @@ public class User : EntityBase
     public string PasswordHash { get; set; }
     public string? UserPath { get; set; }
     public double? Balance { get; set; }
-    public bool? Block { get; set; } = false;
+    public bool? Block { get; set; }
     public ELanguage Language { get; set; } = ELanguage.Uzb;
     public ERole Role { get; set; } = ERole.User;
 

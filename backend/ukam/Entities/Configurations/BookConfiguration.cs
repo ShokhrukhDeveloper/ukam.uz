@@ -12,5 +12,6 @@ public class BookConfiguration : EntityBaseConfiguration<Book>
         builder.Property(b =>b.Author).HasColumnType("varchar(50)").IsRequired(true);
         builder.Property(b =>b.Establish).HasColumnType("varchar(50)");
         builder.Property(b =>b.ConverImage).HasColumnType("varchar(50)");
+        builder.Property(b =>b.BookPath).HasColumnType("varchar(50)");
     }
 }

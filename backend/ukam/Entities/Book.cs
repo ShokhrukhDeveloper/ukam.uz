@@ -10,6 +10,7 @@ public class Book:EntityBase
     public string Establish { get; set; }
     public string Content { get; set; }
     public string ConverImage { get; set; }
+    public string BookPath { get; set; }
     public double Price { get; set; }
     public EType Type { get; set; }
     public ELanguage Language { get; set; }
@@ -20,13 +21,14 @@ public class Book:EntityBase
     [Obsolete("this constroctor obly be used by Ef Core")]
     public Book() { }
 
-    public Book(Backend.Uckam.Models.Book model, string converImage, ELanguage language, EType type, ECheckBook checkBook)
+    public Book(Backend.Uckam.Models.Book model, string converImage, string bookPath, ELanguage language, EType type, ECheckBook checkBook)
     {
         BookName = model.BookName;
         Author = model.Author;
         Establish = model.Establish;
         Content = model.Content;
         ConverImage =converImage;
+        BookPath = bookPath;
         Price = model.Price;
         Type = type;
         Language = language;

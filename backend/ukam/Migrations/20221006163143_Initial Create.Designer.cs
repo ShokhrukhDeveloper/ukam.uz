@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ukam.Data.Migrations
+namespace ukam.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221005201428_base entity enherited")]
-    partial class baseentityenherited
+    [Migration("20221006163143_Initial Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,10 @@ namespace ukam.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BookName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("BookPath")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -63,7 +67,7 @@ namespace ukam.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<ulong>("UserId")
@@ -87,14 +91,13 @@ namespace ukam.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -133,7 +136,7 @@ namespace ukam.Data.Migrations
                     b.Property<int>("Role")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")

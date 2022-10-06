@@ -29,7 +29,7 @@ public partial class BookController:ControllerBase
          try
         {
             _logger.LogInformation("try catch ichiga kirdi.");
-            var createBookResult = await _bookService.CreateBookAsync(ToModel(dtos), dtos.ConverImage);
+            var createBookResult = await _bookService.CreateBookAsync(ToModel(dtos), dtos.ConverImage, dtos.BookFile);
             _logger.LogInformation("1111");
 
             if (!createBookResult.IsSuccess)

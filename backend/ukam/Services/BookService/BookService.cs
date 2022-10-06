@@ -14,19 +14,29 @@ public partial class BookService : IBookService
         _unitOfWork = unitOfWork;
         _logger = logger ;
     }
-    public async  ValueTask<Result<Book>> CreateBookAsync(Book book, IFormFile file)
+    public async  ValueTask<Result<Book>> CreateBookAsync(Book book, IFormFile file,IFormFile bookFile)
     {
       var fileHelper = new FileHelper();
        string fileName = null;
 
+      var fileBookHelper = new FileHelper();
+       string fileBookName = null;
+
        if(file is not null)
         if(!fileHelper.FileValidateImage(file))
-         return new("File is invalid");
+         return new("Image is invalid");
+
+       if(bookFile is not null)
+        if(!fileBookHelper.FileValidate(bookFile))
+         return new("File is invalid");  
 
        if(file != null)
        fileName = fileHelper.WriteFileAsync(file , FileFolders.ConverImage).Result;
 
-       var createdEntity = new Backend.Uckam.Entities.Book(book, fileName, ToEntityELanguage(book.Language), ToEntityEtype(book.Type), ToEntityECheckBook(book.CheckBook));
+       if(bookFile != null)
+       fileBookName = fileHelper.WriteFileAsync(bookFile , FileFolders.BookPath).Result;
+
+       var createdEntity = new Backend.Uckam.Entities.Book(book, fileName, fileBookName ,ToEntityELanguage(book.Language), ToEntityEtype(book.Type), ToEntityECheckBook(book.CheckBook));
 
         try
         {
@@ -37,7 +47,8 @@ public partial class BookService : IBookService
         catch (Exception e)
         {
             _logger.LogInformation($"Error occured at {nameof(BookService)}");
-            throw new("Couldn't create User, Contact support", e);
+            throw new("Couldn't create Book, Contact support", e);
         } 
     }
+
 }

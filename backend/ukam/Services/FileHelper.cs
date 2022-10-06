@@ -19,7 +19,7 @@ public class FileHelper : IFileHelper
     {
         var defineFileExtension = DefineFileExtension(file);
 
-        if ((defineFileExtension.ToLower() == "text" || defineFileExtension.ToLower() == "docs"))
+        if ((defineFileExtension.ToLower() == "txt" || defineFileExtension.ToLower() == "docs"))
             return true;
 
         return false;

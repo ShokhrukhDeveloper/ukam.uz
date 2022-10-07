@@ -44,6 +44,16 @@ public partial class BookController:ControllerBase
         // remove this line next repository 
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteBook(ulong id)
+    {
+        var result = await _bookService.DeleteBookAsync(id);
+
+        if(!result.IsSuccess) return BadRequest(new { ErrorMessage = result.ErrorMessage });
+
+        return Ok(result);
+    }
+
     
     
 }

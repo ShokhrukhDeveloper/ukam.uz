@@ -51,4 +51,23 @@ public partial class BookService : IBookService
         } 
     }
 
+    public async  ValueTask<Result<Book>> DeleteBookAsync(ulong id)
+    {
+        try
+        {
+             var existingBook =  _unitOfWork.Books.GetById(id);
+
+             if(existingBook is null) return new("Category with given Id Not Found");
+
+             var result =  await _unitOfWork.Books.Remove(existingBook);
+
+             return new(true) { Data=ToModel(result)};
+        }
+        catch (Exception e)
+        {
+           _logger.LogError($"Error occured at {nameof(BookService)}", e);
+            throw new(" Contact support.", e);
+        }
+        
+    }
 }

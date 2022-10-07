@@ -1,7 +1,10 @@
 #pragma warning disable
+using Backend.Uckam.data;
 using Backend.Uckam.Dtos;
+using Backend.Uckam.Repositories;
 using Backend.Uckam.Services.BookService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Uckam.Controllers;
 
@@ -13,14 +16,16 @@ public partial class BookController:ControllerBase
     
     private readonly ILogger<BookController> _logger;
     private readonly IBookService _bookService;
+    private readonly AppDbContext _context;
+    private readonly IBookRepository _repo;
 
-    public BookController(ILogger<BookController> logger, IBookService bookService)
+    public BookController(ILogger<BookController> logger, IBookService bookService, AppDbContext context)
     {
         _logger = logger;
         _bookService = bookService ;
+        _context = context;
     }
     
-
     [HttpPost]
     public async Task<IActionResult> CreateBook([FromForm]BookCreate dtos)
     {
@@ -54,6 +59,21 @@ public partial class BookController:ControllerBase
         return Ok(result);
     }
 
-    
-    
+    [HttpGet]
+    public async Task<IActionResult> GetBook()
+    {
+         try
+        {
+            var booksReult = await _bookService.GetAllBook();
+
+            if(!booksReult.IsSuccess) return NotFound(new { ErrorMessage = booksReult.ErrorMessage });
+
+            return Ok(booksReult.Data?.Select(ToDto));
+        }
+        catch (Exception e)
+        {
+             return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+        }
+
+    }
 }

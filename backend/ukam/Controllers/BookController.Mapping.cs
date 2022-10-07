@@ -19,6 +19,20 @@ public partial class BookController
         CategoryId = dtos.CategoryId,
         UserId = dtos.UserId       
     };
+    private Models.Book ToModel(BookUpdate dtos)
+    => new()
+    {
+        BookName = dtos.BookName,
+        Author = dtos.Author,
+        Establish = dtos.Establish,
+        Content = dtos.Content,
+        Price = dtos.Price,
+        Type = ToModelEType(dtos.Type),
+        Language = ToELanguageModel(dtos.Language),
+        CheckBook = ToModelECheckBook(dtos.CheckBook),
+        CategoryId = dtos.CategoryId,
+        UserId = dtos.UserId       
+    };
 
     private Models.ELanguage ToELanguageModel(Dtos.ELanguage language)
     => language switch

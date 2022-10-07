@@ -1,4 +1,5 @@
 #pragma warning disable
+using System.Collections.Generic;
 using Backend.Uckam.Models;
 using Backend.Uckam.Repositories;
 
@@ -69,5 +70,27 @@ public partial class BookService : IBookService
             throw new(" Contact support.", e);
         }
         
+    }
+
+    public async ValueTask<Result<List<Book>>> GetAllBook()
+    {
+        try
+        {
+            var existingBooks = _unitOfWork.Books.GetAll();
+
+            if (existingBooks is null)
+                return new("No books found. Contact support.");
+
+            var filteredBook =existingBooks
+                            .Select(ToModel)
+                            .ToList();
+
+            return new(true) { Data = filteredBook };
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Error occured at {nameof(BookService)}", e);
+            throw new("Couldn't get books. Contact support.", e);
+        }
     }
 }

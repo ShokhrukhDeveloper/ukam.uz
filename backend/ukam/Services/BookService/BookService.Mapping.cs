@@ -12,12 +12,24 @@ public partial class BookService
         Establish = entity.Establish,
         Content = entity.Content,
         ConverImage = entity.ConverImage,
+        BookPath= entity.BookPath,
         Price = entity.Price,
         Type = ToModelEType(entity.Type),
         CheckBook = ToModelECheckBook(entity.CheckBook),
+        Language = ToModelELanguage(entity.Language),
+        CategoryId = entity.CategoryId,
+        UserId = entity.UserId,
     };
 
-    private EType ToModelEType(Backend.Uckam.Entities.EType entity)
+    private ELanguage ToModelELanguage(Backend.Uckam.Entities.Enums.ELanguage? entity)
+    => entity switch
+    {
+      Entities.Enums.ELanguage.Eng => Models.ELanguage.Eng,
+      Entities.Enums.ELanguage.Rus => Models.ELanguage.Rus,
+      _=> Models.ELanguage.Uzb,
+    };
+
+    private EType ToModelEType(Backend.Uckam.Entities.EType? entity)
     => entity switch
     {
         Entities.EType.DiplomIshi => Models.EType.DiplomIshi,
@@ -25,7 +37,7 @@ public partial class BookService
         Entities.EType.Referat => Models.EType.Referat,
         _=> Models.EType.Kitoblar,
     };
-    private ECheckBook ToModelECheckBook(Backend.Uckam.Entities.Enums.ECheckBook entity)
+    private ECheckBook ToModelECheckBook(Backend.Uckam.Entities.Enums.ECheckBook? entity)
     => entity switch
     {
         Entities.Enums.ECheckBook.Tekshirildi => Models.ECheckBook.Tekshirildi,

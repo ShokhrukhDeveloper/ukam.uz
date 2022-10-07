@@ -74,6 +74,23 @@ public partial class BookController:ControllerBase
         {
              return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
         }
-
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateBook([FromRoute] ulong id, [FromForm] BookUpdate dtos)
+    {
+       try
+       {
+          var createdBook = await _bookService.UpdateBookAsync(id, ToModel(dtos), dtos.ConverImage, dtos.BookFile);
+
+          if (!createdBook.IsSuccess)
+                return BadRequest(new { ErrorMessage = createdBook.ErrorMessage });
+
+            return Ok(createdBook);
+       }
+       catch (Exception e)
+       {
+         return StatusCode(StatusCodes.Status500InternalServerError, new { ErrorMessage = e.Message });
+       }
+    }
+    
 }

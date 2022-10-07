@@ -12,9 +12,9 @@ public class Book:EntityBase
     public string? ConverImage { get; set; }
     public string? BookPath { get; set; }
     public double Price { get; set; }
-    public EType? Type { get; set; }
-    public ELanguage? Language { get; set; }
-    public ECheckBook? CheckBook { get; set; }
+    public EType Type { get; set; }
+    public ELanguage Language { get; set; }
+    public ECheckBook CheckBook { get; set; }
     public ulong CategoryId { get; set; } 
     public ulong UserId { get; set; }
 

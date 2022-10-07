@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/SSxUH5sCUr1LK6E8glAjwqzWY8mGA4wfCGM6PpD64sDXShP+UqlL+NnJov7/dCvTGplGV+cJ0/MTiNpDWkvNQ==",
+  "dgSpecHash": "3ji2pytT/zZ20I2C4NnR3MGFccsayh2DUCKgQgsSsYSspWerJklLuMrOC6Bjm10gIL39gE2WiBoQRMwRUBccLw==",
   "success": true,
-  "projectFilePath": "D:\\Pro\\ukam.uz\\backend\\ukam\\ukam.csproj",
+  "projectFilePath": "D:\\pro\\ukam.uz\\backend\\ukam\\ukam.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ogabe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ogabe\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.9\\microsoft.data.sqlite.core.6.0.9.nupkg.sha512",

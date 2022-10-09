@@ -14,6 +14,10 @@ public class User : EntityBase
     public bool? Block { get; set; }
     public ELanguage Language { get; set; } = ELanguage.Uzb;
     public ERole Role { get; set; } = ERole.User;
+    public IEnumerable<CategoryType> CategoryTypes { get; set; } 
+    public IEnumerable<Category> Categories { get; set; } 
+    public IEnumerable<Book> Books { get; set; } 
+
 
     [Obsolete("this constroctor obly be used by Ef Core")]
     public User() { }

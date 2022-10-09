@@ -1,5 +1,4 @@
 #pragma warning disable
-using System.Collections.Generic;
 using Backend.Uckam.Models;
 using Backend.Uckam.Repositories;
 
@@ -13,35 +12,35 @@ public partial class BookService : IBookService
     public BookService(ILogger<BookService> logger, IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _logger = logger ;
+        _logger = logger;
     }
-    public async  ValueTask<Result<Book>> CreateBookAsync(Book book, IFormFile file,IFormFile bookFile)
+    public async ValueTask<Result<Book>> CreateBookAsync(Book book, IFormFile file, IFormFile bookFile)
     {
-      var fileHelper = new FileHelper();
-       string fileName = null;
+        var fileHelper = new FileHelper();
+        string fileName = null;
 
-      var fileBookHelper = new FileHelper();
-       string fileBookName = null;
+        var fileBookHelper = new FileHelper();
+        string fileBookName = null;
 
-       if(file is not null)
-        if(!fileHelper.FileValidateImage(file))
-         return new("Image is invalid");
+        if (file is not null)
+            if (!fileHelper.FileValidateImage(file))
+                return new("Image is invalid");
 
-       if(bookFile is not null)
-        if(!fileBookHelper.FileValidate(bookFile))
-         return new("File is invalid");  
+        if (bookFile is not null)
+            if (!fileBookHelper.FileValidate(bookFile))
+                return new("File is invalid");
 
-       if(file != null)
-       fileName = fileHelper.WriteFileAsync(file , FileFolders.ConverImage).Result;
+        if (file != null)
+            fileName = fileHelper.WriteFileAsync(file, FileFolders.ConverImage).Result;
 
-       if(bookFile != null)
-       fileBookName = fileHelper.WriteFileAsync(bookFile , FileFolders.BookPath).Result;
+        if (bookFile != null)
+            fileBookName = fileHelper.WriteFileAsync(bookFile, FileFolders.BookPath).Result;
 
-       var createdEntity = new Backend.Uckam.Entities.Book(book, fileName, fileBookName ,ToEntityELanguage(book.Language), ToEntityEtype(book.Type), ToEntityECheckBook(book.CheckBook));
+        var createdEntity = new Backend.Uckam.Entities.Book(book, fileName, fileBookName, ToEntityELanguage(book.Language ?? Backend.Uckam.Models.ELanguage.Uzb));
 
         try
         {
-            var createdBook = await  _unitOfWork.Books.AddAsync(createdEntity);
+            var createdBook = await _unitOfWork.Books.AddAsync(createdEntity);
 
             return new(true) { Data = ToModel(createdBook) };
         }
@@ -49,109 +48,41 @@ public partial class BookService : IBookService
         {
             _logger.LogInformation($"Error occured at {nameof(BookService)}");
             throw new("Couldn't create Book, Contact support", e);
-        } 
+        }
     }
 
-    public async  ValueTask<Result<Book>> DeleteBookAsync(ulong id)
+    public async ValueTask<Result<Book>> DeleteBookAsync(ulong id)
     {
         try
         {
-             var existingBook =  _unitOfWork.Books.GetById(id);
+            var existingBook = _unitOfWork.Books.GetById(id);
 
-             if(existingBook is null) return new("Category with given Id Not Found");
+            if (existingBook is null) return new("Category with given Id Not Found");
 
-             var result =  await _unitOfWork.Books.Remove(existingBook);
+            var result = await _unitOfWork.Books.Remove(existingBook);
 
-             return new(true) { Data=ToModel(result)};
-        }
-        catch (Exception e)
-        {
-           _logger.LogError($"Error occured at {nameof(BookService)}", e);
-            throw new(" Contact support.", e);
-        }
-        
-    }
-
-    public async ValueTask<Result<List<Book>>> GetAllBook()
-    {
-        try
-        {
-            var existingBooks = _unitOfWork.Books.GetAll();
-
-            if (existingBooks is null)
-                return new("No books found. Contact support.");
-
-            var filteredBook =existingBooks
-                            .Select(ToModel)
-                            .ToList();
-
-            return new(true) { Data = filteredBook };
+            return new(true) { Data = ToModel(result) };
         }
         catch (Exception e)
         {
             _logger.LogError($"Error occured at {nameof(BookService)}", e);
-            throw new("Couldn't get books. Contact support.", e);
+            throw new(" Contact support.", e);
         }
+
     }
 
-    public async ValueTask<Result<Book>> UpdateBookAsync(ulong id, Book book, IFormFile file, IFormFile fileBook)
+    public ValueTask<Result<Book>> GetAllBooksAsync()
     {
-        string? fileName = null;
-        string? fileBookName = null;
+        throw new NotImplementedException();
+    }
 
-        var existingBook = _unitOfWork.Books.GetById(id);
+    public ValueTask<Result<Book>> GetByIdAsync(ulong id)
+    {
+        throw new NotImplementedException();
+    }
 
-        var fileHelper = new FileHelper();
-        var fileBookHelper = new FileHelper();
-
-        if (existingBook is null)
-            return new("User with given ID not found.");
-
-        if (file is not null)
-            if (!fileHelper.FileValidateImage(file))
-                return new("ImageFile is invalid");
-
-        if (existingBook.ConverImage != null)
-            if (!fileHelper.DeleteFileByName(existingBook.ConverImage)) //like
-                return new("ImageFile is not availabe");
-
-        if (file != null)
-            fileName = await fileHelper.WriteFileAsync(file, FileFolders.UserImage);
-            
-        //===========================================================================
-        if (fileBook is not null)
-            if (!fileBookHelper.FileValidate(fileBook))
-                return new("File is invalid");
-
-        if (existingBook.BookPath != null)
-            if (!fileBookHelper.DeleteFileByName(existingBook.BookPath))
-                return new("File is not availabe");  
-
-        if (fileBook != null)
-            fileBookName = await fileBookHelper.WriteFileAsync(fileBook, FileFolders.BookPath);   
-
-         existingBook.BookName = book.BookName;
-         existingBook.Author = book.Author;
-         existingBook.Establish = book.Establish;
-         existingBook.Content = book.Content;
-         existingBook.ConverImage = book.ConverImage;
-         existingBook.BookPath = book.BookPath;
-         existingBook.Price = book.Price;
-         existingBook.Type = ToEntityEtype(book.Type);
-         existingBook.Language = ToEntityELanguage(book.Language);
-         existingBook.CheckBook = ToEntityECheckBook(book.CheckBook);   
-         existingBook.CategoryId = book.CategoryId;
-         existingBook.UserId = book.UserId;
-        try
-        {
-            var createdBook = await _unitOfWork.Books.Update(existingBook);
-
-            return new(true) { Data = ToModel(createdBook) };
-        }
-        catch (Exception e)
-        {
-            _logger.LogInformation($"Error occured at {nameof(BookService)}");
-            throw new("Couldn't create Book, Contact support", e);
-        }        
+    public ValueTask<Result<Book>> UpdateAsync(ulong id, User model, IFormFile image, IFormFile text)
+    {
+        throw new NotImplementedException();
     }
 }

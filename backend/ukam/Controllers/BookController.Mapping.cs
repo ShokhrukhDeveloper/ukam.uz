@@ -13,10 +13,8 @@ public partial class BookController
         Establish = dtos.Establish,
         Content = dtos.Content,
         Price = dtos.Price,
-        Type = ToModelEType(dtos.Type),
         Language = ToELanguageModel(dtos.Language),
-        CheckBook = ToModelECheckBook(dtos.CheckBook),
-        CategoryId = dtos.CategoryId,
+        TypeId = dtos.TypeId,
         UserId = dtos.UserId       
     };
 
@@ -26,21 +24,5 @@ public partial class BookController
         Dtos.ELanguage.Eng => Models.ELanguage.Eng,
         Dtos.ELanguage.Rus => Models.ELanguage.Rus,
         _ => Models.ELanguage.Uzb
-    };
-
-    private Models.EType ToModelEType(Dtos.EType type)
-    => type switch
-    {
-        Dtos.EType.DiplomIshi => Models.EType.DiplomIshi,
-        Dtos.EType.KursIshi => Models.EType.KursIshi,
-        Dtos.EType.Referat => Models.EType.Referat,
-        _=> Models.EType.Kitoblar,
-    };
-
-    private Models.ECheckBook ToModelECheckBook(Dtos.ECheckBook dto)
-    => dto switch
-    {
-        Dtos.ECheckBook.Tekshirildi => Models.ECheckBook.Tekshirildi,
-        _=> Models.ECheckBook.Tekshirilmadi,
-    } ;   
+    };  
 }

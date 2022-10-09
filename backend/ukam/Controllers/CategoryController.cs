@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Uckam.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using ukam.Dtos.CategoryDTOs;
 using ukam.Services.CategoryService;
 
@@ -11,13 +12,15 @@ namespace ukam.Controllers;
     {
         private readonly ICategoryService _categoryService;
         private readonly ILogger<CategoryController> _logger;
+    private readonly IUnitOfWork _wrok;
 
-        public CategoryController(ICategoryService categoryService,ILogger<CategoryController> logger)
+    public CategoryController(IUnitOfWork work,ICategoryService categoryService,ILogger<CategoryController> logger)
         {
             _categoryService = categoryService;
             _logger = logger;
+            _wrok = work;
         }
-
+        
         [HttpGet]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Category>))]

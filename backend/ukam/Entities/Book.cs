@@ -12,16 +12,17 @@ public class Book:EntityBase
     public string ConverImage { get; set; }
     public string BookPath { get; set; }
     public double Price { get; set; }
-    public EType Type { get; set; }
+    public bool Check { get; set; }
     public ELanguage Language { get; set; }
-    public ECheckBook CheckBook { get; set; }
-    public ulong CategoryId { get; set; } 
+    public ulong TypeId { get; set; } 
     public ulong UserId { get; set; }
+    public CategoryType? Types { get; set; }
+    public User? Users { get; set; }
 
     [Obsolete("this constroctor obly be used by Ef Core")]
     public Book() { }
 
-    public Book(Backend.Uckam.Models.Book model, string converImage, string bookPath, ELanguage language, EType type, ECheckBook checkBook)
+    public Book(Backend.Uckam.Models.Book model, string converImage, string bookPath, ELanguage language)
     {
         BookName = model.BookName;
         Author = model.Author;
@@ -30,10 +31,9 @@ public class Book:EntityBase
         ConverImage =converImage;
         BookPath = bookPath;
         Price = model.Price;
-        Type = type;
+        Check = model.Check;
         Language = language;
-        CheckBook = checkBook;
-        CategoryId = model.CategoryId;
+        TypeId = model.TypeId;
         UserId = model.UserId;
     }
 }

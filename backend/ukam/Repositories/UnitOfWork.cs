@@ -9,7 +9,7 @@ public class UnitOfWork : IUnitOfWork
     public IUSerRepository Users { get; set; }
     public ICategoryRepository Categories { get; set; }
     public IBookRepository Books { get; set; }
-   
+    public ICategoryTypeRepository CategoryTypes { get; set; }
 
     public UnitOfWork(AppDbContext context)
     {
@@ -17,6 +17,7 @@ public class UnitOfWork : IUnitOfWork
         Users = new UserRepository(context);
         Categories= new CategoryRepository(context);
         Books = new BookRepository(context);
+        CategoryTypes = new CategoryTypeRepository(context);
     }
 
     public void Dispose()

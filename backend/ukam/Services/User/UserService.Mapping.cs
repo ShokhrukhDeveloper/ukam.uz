@@ -36,7 +36,7 @@ public partial class UserService
         _ => Models.ERole.User,
     };
 
-      private User ToModel(Entities.User entity)
+    public User ToModel(Entities.User entity)
     => new()
     {
         Id = entity.Id,

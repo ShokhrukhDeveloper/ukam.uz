@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ukam.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221006163143_Initial Create")]
-    partial class InitialCreate
+    [Migration("20221009142421_Initilizer")]
+    partial class Initilizer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,10 +37,7 @@ namespace ukam.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("CheckBook")
+                    b.Property<bool>("Check")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
@@ -64,7 +61,7 @@ namespace ukam.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("Type")
+                    b.Property<ulong>("TypeId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -74,6 +71,10 @@ namespace ukam.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Books");
                 });
@@ -94,7 +95,37 @@ namespace ukam.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong?>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.CategoryType", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<ulong>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong>("CreatorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -102,7 +133,11 @@ namespace ukam.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.ToTable("CategoryTypes");
                 });
 
             modelBuilder.Entity("Backend.Uckam.Entities.User", b =>
@@ -148,6 +183,70 @@ namespace ukam.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.Book", b =>
+                {
+                    b.HasOne("Backend.Uckam.Entities.CategoryType", "Types")
+                        .WithMany("Books")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Uckam.Entities.User", "Users")
+                        .WithMany("Books")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Types");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.Category", b =>
+                {
+                    b.HasOne("Backend.Uckam.Entities.User", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.CategoryType", b =>
+                {
+                    b.HasOne("Backend.Uckam.Entities.Category", "Category")
+                        .WithMany("CategoryTypes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Backend.Uckam.Entities.User", "User")
+                        .WithMany("CategoryTypes")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.Category", b =>
+                {
+                    b.Navigation("CategoryTypes");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.CategoryType", b =>
+                {
+                    b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Backend.Uckam.Entities.User", b =>
+                {
+                    b.Navigation("Books");
+
+                    b.Navigation("Categories");
+
+                    b.Navigation("CategoryTypes");
                 });
 #pragma warning restore 612, 618
         }
